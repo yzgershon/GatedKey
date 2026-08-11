@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "GatedKey",
+  "version": "0.1.0",
+  "identifier": "com.gatedkey.app",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "GatedKey",
+        "width": 960,
+        "height": 680,
+        "minWidth": 720,
+        "minHeight": 540,
+        "resizable": true,
+        "center": true,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "shortDescription": "Remap any key to launch anything.",
+    "longDescription": "GatedKey lets you point any key on your keyboard, including the Copilot key, at any app, folder, URL or command. No scripting, no reboot."
+  }
+}

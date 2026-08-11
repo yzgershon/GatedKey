@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GatedKey</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">G</div>
+        <div>
+          <h1>GatedKey</h1>
+          <p class="sub">Any key. Any app.</p>
+        </div>
+      </div>
+      <label class="master">
+        <span id="masterLabel">Enabled</span>
+        <input type="checkbox" id="master" checked />
+        <span class="switch" aria-hidden="true"></span>
+      </label>
+    </header>
+
+    <main>
+      <section id="empty" class="empty hidden">
+        <div class="quickstart">
+          <h2>Reclaim your Copilot key</h2>
+          <p>
+            The Copilot key isn't special. It sends
+            <code>Win + Shift + F23</code>, so GatedKey can catch it and open
+            whatever you want instead.
+          </p>
+          <button class="primary" id="quickCopilot">Point my Copilot key at an app</button>
+        </div>
+        <p class="or">or</p>
+        <button class="ghost" id="emptyAdd">Bind a different key</button>
+      </section>
+
+      <section id="listWrap" class="hidden">
+        <div class="listhead">
+          <h2>Your keys</h2>
+          <button class="primary small" id="add">Add a key</button>
+        </div>
+        <ul id="list" class="bindings"></ul>
+      </section>
+    </main>
+
+    <footer class="settings">
+      <label class="check">
+        <input type="checkbox" id="startWithWindows" />
+        <span>Start with Windows</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="startMinimised" />
+        <span>Start hidden in the tray</span>
+      </label>
+      <button class="link" id="openConfig">Open config folder</button>
+    </footer>
+
+    <div id="modal" class="modal hidden">
+      <div class="sheet">
+        <h2 id="modalTitle">Add a key</h2>
+
+        <label class="field">
+          <span class="label">Name</span>
+          <input type="text" id="fName" placeholder="Copilot key opens my editor" />
+        </label>
+
+        <div class="field">
+          <span class="label">Key</span>
+          <button class="capture" id="fCapture">
+            <span id="fChordLabel">Click, then press a key</span>
+          </button>
+          <p class="hint" id="captureHint"></p>
+        </div>
+
+        <label class="field">
+          <span class="label">Does this</span>
+          <select id="fKind">
+            <option value="launchApp">Open an app</option>
+            <option value="openUrl">Open a website</option>
+            <option value="openFolder">Open a folder</option>
+            <option value="runCommand">Run a command</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label" id="fTargetLabel">App</span>
+          <div class="row">
+            <input type="text" id="fTarget" list="appList" placeholder="Pick or type a path" />
+            <button class="ghost small" id="fBrowse">Browse</button>
+          </div>
+          <datalist id="appList"></datalist>
+        </label>
+
+        <label class="field hidden" id="fArgsField">
+          <span class="label">Arguments <em>optional</em></span>
+          <input type="text" id="fArgs" placeholder="--flag" />
+        </label>
+
+        <p class="error hidden" id="fError"></p>
+
+        <div class="actions">
+          <button class="ghost" id="fTest">Test it</button>
+          <div class="spacer"></div>
+          <button class="ghost" id="fCancel">Cancel</button>
+          <button class="primary" id="fSave">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
