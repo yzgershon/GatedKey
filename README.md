@@ -130,7 +130,7 @@ into a keylogger.
 
 | | Scripting? | Launch apps? | Reboot? | Size |
 |---|---|---|---|---|
-| **GatedKey** | No | Yes | No | ~5MB |
+| **GatedKey** | No | Yes | No | 2.6MB exe |
 | PowerToys | No | Yes, buried | No | ~200MB suite |
 | AutoHotkey | Yes | Yes | No | small |
 | SharpKeys | No | **No**, key to key only | **Yes** | small |
