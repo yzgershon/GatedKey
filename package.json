@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Remap any key on your keyboard to launch anything.",
   "scripts": {
+    "tauri": "tauri",
     "dev": "tauri dev",
     "build": "tauri build",
     "icon": "tauri icon"
