@@ -128,12 +128,17 @@ into a keylogger.
 
 ## Compared to the alternatives
 
-| | Scripting? | Launch apps? | Reboot? | Size |
+| | Scripting? | Launch apps? | Reboot? | Download |
 |---|---|---|---|---|
-| **GatedKey** | No | Yes | No | 2.6MB exe |
+| **GatedKey** | No | Yes | No | **0.96MB** |
 | PowerToys | No | Yes, buried | No | ~200MB suite |
 | AutoHotkey | Yes | Yes | No | small |
 | SharpKeys | No | **No**, key to key only | **Yes** | small |
+
+Those sizes are measured, not estimated: a 2.6MB executable, a 0.96MB installer.
+GatedKey is small because it uses the WebView2 that already ships with Windows
+instead of bundling a browser engine, and because the whole app is a keyboard
+hook and a list.
 
 ## Build from source
 
