@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    # GITHUB_TOKEN is read-only by default, so tauri-action builds the installer
+    # successfully and then fails on the very last step with "Resource not
+    # accessible by integration" when it tries to create the release.
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
