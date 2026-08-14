@@ -1,7 +1,7 @@
-{
+﻿{
   "name": "gatedkey",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Remap any key on your keyboard to launch anything.",
   "scripts": {
     "tauri": "tauri",
