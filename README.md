@@ -48,8 +48,13 @@ Grab the latest installer from [Releases](https://github.com/yzgershon/GatedKey/
 Windows 10 and 11, x64 and ARM64.
 
 GatedKey has to be running for your keys to work, because a keyboard hook lives
-and dies with its process. It sits in the tray and starts with Windows if you
-tell it to.
+and dies with its process. If it is not running, a remapped Copilot key just
+opens Copilot again.
+
+For that reason **it starts with Windows by default**, quietly into the tray.
+Both of those are plain checkboxes in the footer if you want them off. Opening
+the app yourself always shows the window; the hidden start applies only when
+Windows launches it at login.
 
 ## Is this a keylogger?
 

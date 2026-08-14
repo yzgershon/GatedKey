@@ -218,7 +218,9 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_autostart::init(
             tauri_plugin_autostart::MacosLauncher::LaunchAgent,
-            None,
+            // Windows passes this when it starts us at login, which is the only
+            // way to tell an automatic launch from the user opening the app.
+            Some(vec!["--autostart"]),
         ))
         .invoke_handler(tauri::generate_handler![
             get_config,
@@ -235,7 +237,26 @@ pub fn run() {
         .setup(|app| {
             let handle = app.handle().clone();
             let path = config_path(&handle);
-            let cfg = Config::load(&path);
+            let first_run = !path.exists();
+            let mut cfg = Config::load(&path);
+
+            // A key remapper that does not survive a reboot is not a working key
+            // remapper: the hook dies with the process and every bound key
+            // silently reverts. So autostart is on by default, and the checkbox
+            // in the footer shows it rather than hiding it.
+            if first_run {
+                cfg.start_with_windows = true;
+                let _ = cfg.save(&path);
+            }
+
+            // Re-apply on every launch so the registry entry and the checkbox
+            // cannot drift apart, which would leave the UI lying about it.
+            let launcher = handle.autolaunch();
+            let _ = if cfg.start_with_windows {
+                launcher.enable()
+            } else {
+                launcher.disable()
+            };
 
             if hook::debug_on() {
                 eprintln!(
@@ -246,7 +267,11 @@ pub fn run() {
             }
             hook::set_bindings(cfg.bindings.clone());
             hook::set_enabled(cfg.enabled);
-            let start_hidden = cfg.start_minimised;
+            // Only hide when Windows launched us at login. If the user opened the
+            // app themselves they want to see it, and an app that starts to
+            // nothing visible reads as an app that failed to start.
+            let launched_at_login = std::env::args().any(|a| a == "--autostart");
+            let start_hidden = cfg.start_minimised && launched_at_login;
             app.manage(AppState {
                 config: Mutex::new(cfg),
                 path,

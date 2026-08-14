@@ -56,8 +56,10 @@ impl Default for Config {
         Config {
             bindings: Vec::new(),
             enabled: true,
-            start_with_windows: false,
-            start_minimised: false,
+            // See the first-run note in lib.rs: bound keys stop working entirely
+            // when the app is not running, so both of these default on.
+            start_with_windows: true,
+            start_minimised: true,
         }
     }
 }
